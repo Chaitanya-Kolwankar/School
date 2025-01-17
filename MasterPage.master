@@ -1,0 +1,289 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <%--<link rel="shortcut icon" href="image/logo.png" />--%>
+    <title>SCHOOL ERP</title>
+    <script src="assets/libs/jquery/dist/jquery.min.js"></script>
+
+    <link href="assets/libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/libs/flot/css/float-chart.css" rel="stylesheet" />
+    <link href="dist/css/style.min.css" rel="stylesheet" />
+    <link href="dist/css/icons/font-awesome/css/fontawesome.min.css" rel="stylesheet" />
+    <link href="notify-master/css/notify.css" rel="stylesheet" />
+    <link href="assets/libs/datatables/media/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="bootstrap-datepicker-1.9.0-dist/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+    <link href="css/bootstrap-multiselect.css" rel="stylesheet" />
+    <%--<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css" />--%>
+
+    <%--<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>--%>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <script type="text/javascript" language="javascript">
+        function DisableBackButton() {
+            window.history.forward()
+        }
+        DisableBackButton();
+        window.onload = DisableBackButton;
+        window.onpageshow = function (evt) { if (evt.persisted) DisableBackButton() }
+        window.onunload = function () { void (0) }
+    </script>
+    <style>
+        .required {
+            color: red;
+        }
+
+        .mygrid th {
+            color: White;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .mygrid {
+            text-align: center;
+        }
+
+            .mygrid a {
+                color: gray;
+            }
+
+        .btn-success {
+            background-color: #13A609;
+            border-radius: 6px;
+        }
+
+        .FixedHeader {
+            position: sticky;
+            font-weight: bold;
+            top: 0;
+            background-color: #6e04be !important;
+            background-image: linear-gradient(to right, #6f03bf 1%, #363695 100%) !important;
+            background-size: cover !important;
+        }
+
+        .mygrid > tbody > tr:first-child {
+            background-color: #6e04be !important;
+            background-image: linear-gradient(to right, #6f03bf 1%, #363695 100%) !important;
+            background-size: cover !important;
+            color: white;
+        }
+
+        .btn-success {
+            background-image: linear-gradient(to right, #6f03bf 1%, #363695 100%) !important;
+            background-color: #6e04be !important;
+            border: none !important;
+            color: white !important;
+            font-weight: bold;
+        }
+
+        .hero-image {
+            background-image: url('image/hero_img.png');
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+
+    <form id="form1" runat="server">
+        <div>
+            <div id="main-wrapper">
+                <header class="topbar" data-navbarbg="skin5">
+                    <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+                        <div class="navbar-header" data-logobg="skin5">
+                            <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i class="fa fa-bars"></i></a>
+                            <a class="navbar-brand" href="javascript:void(0)">
+                                <b class="logo-icon p-l-10" id="utk1" style="display: none">
+                                    <asp:Image ID="logo" class="light-logo" Style="width: 60px" runat="server" src="image/school_logo.png" />
+                                </b>
+                                <span class="logo-text">
+                                    <asp:Label ID="lblschoolname" runat="server" Style="font-family: 'Times New Roman'; font-size: 22px; margin-left: 5px"></asp:Label>
+                                </span>
+                            </a>
+                            <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)" data-toggle="collapse" data-target="javascript:void(0)navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i class="ti-more"></i></a>
+                        </div>
+                        <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
+                            <ul class="navbar-nav float-left mr-auto">
+                                <li class="nav-item d-none d-md-block"><a class="nav-link sidebartoggler waves-effect waves-light" href="javascript:void(0)" data-sidebartype="mini-sidebar" onclick="myFunction()"><i class="fa fa-bars"></i></a></li>
+                                <li class="nav-item">
+                                    <div class="row" style="padding-top: 10px;">
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-3" style="padding-left: 0px; font-weight: bold; color: #fff">
+                                            <asp:Label ID="Label3" runat="server" Text="Academic Year"></asp:Label>
+                                        </div>
+                                        <div class="col-md-8" style="padding-left: 0px;">
+                                            <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+                                            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                                                <ContentTemplate>
+                                                    <asp:DropDownList ID="ddlyear" CssClass="form-control" TabIndex="1" runat="server" OnSelectedIndexChanged="ddlyear_SelectedIndexChanged" AutoPostBack="true" Style="border-radius: 5px; width: 300px">
+                                                    </asp:DropDownList>
+                                                </ContentTemplate>
+                                            </asp:UpdatePanel>
+                                        </div>
+
+                                    </div>
+                                </li>
+                            </ul>
+                            <ul class="navbar-nav float-right">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <img src="assets/images/users/1.jpg" alt="user" class="rounded-circle" width="31" /></a>
+                                    <div class="dropdown-menu dropdown-menu-right user-dd animated">
+                                        <a class="dropdown-item" href="frm_personal_details.aspx"><i class="ti-user m-r-5 m-l-5"></i>My Profile</a>
+                                        <a class="dropdown-item" href="ChangePasswd.aspx"><i class="fa fa-unlock m-r-5 m-l-5"></i>Change Password</a>
+                                        <a class="dropdown-item" href="Login.aspx"><i class="fa fa-power-off m-r-5 m-l-5"></i>Logout</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </header>
+                <aside class="left-sidebar" data-sidebarbg="skin5" style="background: linear-gradient(to bottom, #6f03bf 1%, #363695 100%) !important;">
+                    <div class="scroll-sidebar" style="background: transparent !important;">
+                        <nav class="sidebar-nav" style="margin: 6px">
+                            <ul id="sidebarnav" class="p-t-30">
+
+                                <li class="sidebar-item" id="ADMINISTRATION" runat="server" style="display: none"><a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-child"></i><span style="margin-left: 20px; font-size: 16px">Administrator</span></a>
+                                    <ul aria-expanded="false" class="collapse  first-level">
+                                        <%--<li class="sidebar-item" id="DepartDesig" runat="server" style="display: none"><a href="DepartDesig.aspx" class="sidebar-link"><i class="fa fa-edit fa-fw"></i><span class="hide-menu">Dept/Desig</span></a></li>--%>
+                                        <li class="sidebar-item" id="RoleMaster" runat="server" style="display: none"><a href="Grant_Access.aspx" class="sidebar-link"><i class="fa fa-check"></i><span class="hide-menu">Role Master</span></a></li>
+                                        <%--<li class="sidebar-item" id="formInsert" runat="server" style="display: none"><a href="Form_Insert.aspx" class="sidebar-link"><i class="fa fa-plus"></i><span class="hide-menu">Form Insert</span></a></li>--%>
+                                    </ul>
+                                </li>
+                                <li class="sidebar-item" id="ACADEMICS" runat="server" style="display: none"><a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-graduation-cap fa-fw"></i><span style="margin-left: 20px; font-size: 16px">Academics</span></a>
+                                    <ul aria-expanded="false" class="collapse  first-level">
+                                        <%--<li class="sidebar-item" id="AcademicYear" runat="server" style="display: none"><a href="frm_Academic_Year.aspx" class="sidebar-link"><i class="fa fa-edit fa-fw"></i><span class="hide-menu">Academic Year </span></a></li>--%>
+                                        <li class="sidebar-item" id="MasterForm" runat="server" style="display: none"><a href="javascript:void(0)" class="sidebar-link has-arrow waves-effect waves-dark" aria-expanded="false"><i class="fa  fa-list fa-fw"></i><span class="hide-menu">Master Form </span></a>
+                                            <ul aria-expanded="false" class="collapse first-level">
+                                                <li class="sidebar-item" id="Medium" runat="server"><a href="frm_Medium_Master.aspx" class="sidebar-link"><span style="padding-left: 15px"><i class="fa  fa-book"></i><span class="hide-menu">Medium </span></span></a></li>
+                                                <li class="sidebar-item" id="Standard" runat="server"><a href="frm_Standard_Master.aspx" class="sidebar-link"><span style="padding-left: 15px"><i class="fa  fa-list-ol"></i><span class="hide-menu">Standard </span></span></a></li>
+                                                <li class="sidebar-item" id="Divison" runat="server"><a href="frm_Divison_Master.aspx" class="sidebar-link"><span style="padding-left: 15px"><i class="fa fa-object-ungroup"></i><span class="hide-menu">Division </span></span></a></li>
+                                            </ul>
+                                        </li>
+                                        <%--<li class="sidebar-item" id="StudentAcademicRecords" runat="server" style="display: none"><a href="frm_student_acadmic_record.aspx" class="sidebar-link"><i class="fa fa-book fa-fw"></i><span class="hide-menu">Student Academic Records </span></a></li>--%>
+                                        <li class="sidebar-item" id="StudentTransfer" runat="server" style="display: none"><a href="Student_transfer.aspx" class="sidebar-link"><i class="fas fa-arrows-alt-h"></i><span class="hide-menu ">Student Transfer</span></a></li>
+                                        <li class="sidebar-item" id="LeavingCertificate" runat="server" style="display: none"><a href="Leaving_certificate.aspx" class="sidebar-link"><i class="fa fa-graduation-cap fa-fw"></i><span class="hide-menu">Leaving Certificate</span></a></li>
+                                        <li class="sidebar-item" id="BonafideCertificate" runat="server" style="display: none"><a href="Bonafide_Certificate.aspx" class="sidebar-link"><i class="fa fa-graduation-cap fa-fw"></i><span class="hide-menu">Bonafide Certificate </span></a></li>
+                                    </ul>
+                                </li>
+                                <li class="sidebar-item" id="ADMISSION" runat="server" style="display: none"><a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-users fa-2x"></i><span style="margin-left: 20px; font-size: 16px">Admission</span></a>
+                                    <ul aria-expanded="false" class="collapse  first-level">
+                                        <li class="sidebar-item" id="StudentMaster" runat="server" style="display: none"><a href="student_master.aspx" class="sidebar-link"><i class="fa fa-user-md"></i><span class="hide-menu">Student Master </span></a></li>
+                                        <li class="sidebar-item" id="GRAllocation" runat="server" style="display: none"><a href="frm_GR_allocation.aspx" class="sidebar-link"><i class="fa fa-edit fa-fw"></i><span class="hide-menu">GR Allocation </span></a></li>
+                                        <li class="sidebar-item" id="DivisionAllocation" runat="server" style="display: none"><a href="frm_Division_Allocation.aspx" class="sidebar-link"><i class="fa fa-check"></i><span class="hide-menu">Division Allocation </span></a></li>
+                                        <li class="sidebar-item" id="GroupAllocation" runat="server" style="display: none"><a href="frm_group_allocation.aspx" class="sidebar-link"><i class="fa fa-check"></i><span class="hide-menu">Group Allocation </span></a></li>
+                                        <%--<li class="sidebar-item" id="ModifyData" runat="server" style="display: none"><a href="frmModifyData.aspx" class="sidebar-link"><i class="fa fa-check"></i><span class="hide-menu">Modify Data </span></a></li>--%>
+                                        <%--<li class="sidebar-item" id="categoryform" runat="server" style="display: none"><a href="category_master.aspx" class="sidebar-link"><i class="fa fa-list fa-fw"></i><span class="hide-menu">Category Cast Data </span></a></li>--%>
+                                    </ul>
+                                </li>
+                                <li class="sidebar-item" id="FEE" runat="server" style="display: none"><a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-money-bill-alt"></i><span style="margin-left: 20px; font-size: 16px">Fees</span></a>
+                                    <ul aria-expanded="false" class="collapse  first-level">
+                                        <li class="sidebar-item" id="FeeDuration" runat="server" style="display: none"><a href="frm_feeDuration.aspx" class="sidebar-link"><i class="fa fa-check"></i><span class="hide-menu">Fee Duration </span></a></li>
+                                        <li class="sidebar-item" id="FeeMaster" runat="server" style="display: none"><a href="frm_Fee_Master.aspx" class="sidebar-link"><i class="fa fa-credit-card"></i><span class="hide-menu">Fee Master </span></a></li>
+                                        <li class="sidebar-item" id="FeeEntry" runat="server" style="display: none"><a href="frm_feeEntry.aspx" class="sidebar-link"><i class="fas fa-file-alt"></i><span class="hide-menu">Fee Entry </span></a></li>
+                                        <li class="sidebar-item" id="FeeReport" runat="server" style="display: none"><a href="frm_fee_report.aspx" class="sidebar-link"><i class="fas fa-file-alt"></i><span class="hide-menu">Fee Report </span></a></li>
+                                    </ul>
+                                </li>
+                                <li class="sidebar-item" id="EXAMMODULE" runat="server" style="display: none"><a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-file-alt  fa-2x"></i><span style="margin-left: 20px; font-size: 16px">Exam </span></a>
+                                    <ul aria-expanded="false" class="collapse  first-level">
+                                        <li class="sidebar-item" id="SubjectMaster" runat="server" style="display: none"><a href="frm_Subject_Master.aspx" class="sidebar-link"><i class="fa fa-book"></i><span class="hide-menu">Subject Master </span></a></li>
+                                        <li class="sidebar-item" id="GroupMaster" runat="server" style="display: none"><a href="frm_group_master.aspx" class="sidebar-link"><i class="fa fa-book"></i><span class="hide-menu">Group Master </span></a></li>
+                                        <li class="sidebar-item" id="ExamMaster" runat="server" style="display: none"><a href="frm_Exam_Master.aspx" class="sidebar-link"><i class="fa fa-users"></i><span class="hide-menu">Exam Master </span></a></li>
+                                        <li class="sidebar-item" id="examcriteria" runat="server" style="display: none"><a href="marks_criteria.aspx" class="sidebar-link"><i class="fa fa-credit-card"></i><span class="hide-menu">Exam Criteria </span></a></li>
+                                        <li class="sidebar-item" id="MarksEntry" runat="server" style="display: none"><a href="marks_entry.aspx" class="sidebar-link"><i class="fa fa-credit-card"></i><span class="hide-menu">Marks Entry </span></a></li>
+                                        <li class="sidebar-item" id="Gazette" runat="server" style="display: none"><a href="gazette.aspx" class="sidebar-link"><i class="fa fa-credit-card"></i><span class="hide-menu">Gaztte </span></a></li>
+                                    </ul>
+                                </li>
+                                <li class="sidebar-item" id="REPORTS" runat="server" style="display: none"><a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-search"></i><span style="margin-left: 20px; font-size: 16px">Reports</span></a>
+                                    <ul aria-expanded="false" class="collapse  first-level">
+                                        <li class="sidebar-item" id="StudentDetailReport" runat="server" style="display: none"><a href="Studentdetailed_report.aspx" class="sidebar-link"><i class="fas fa-clone"></i><span class="hide-menu">Student Detailed Report</span></a></li>
+                                        <li class="sidebar-item" id="GRReport" runat="server" style="display: none"><a href="GR_report.aspx" class="sidebar-link"><i class="fa fa-tasks"></i><span class="hide-menu">GR Report </span></a></li>
+
+
+                                        <%-- <li class="sidebar-item" id="StudentIDCard" runat="server" style="display: none"><a href="id_generate.aspx" class="sidebar-link"><i class="fas fa-clone"></i><span class="hide-menu">Student/Staff  ID Card</span></a></li>
+                                        <li class="sidebar-item" id="StatisticalReport" runat="server" style="display: none"><a href="Statistical_report.aspx" class="sidebar-link"><i class="fas fa-file-alt"></i><span class="hide-menu">Statistical Reports</span></a></li>
+                                        <li class="sidebar-item" id="" runat="server"><a href="javascript:void(0)" class="sidebar-link"><i class="fa fa-align-left"></i><span class="hide-menu">Fee Reports </span></a></li>
+                                        <li class="sidebar-item" id="ExamReport" runat="server"><a href="Exam_overall_report.aspx" class="sidebar-link"><i class="fa fa-tasks"></i><span class="hide-menu">Exam Reports </span></a></li>--%>
+
+                                        <li class="sidebar-item" id="EmployeeReports" runat="server" style="display: none"><a href="employee_detail_report.aspx" class="sidebar-link"><i class="fa fa-tasks"></i><span class="hide-menu">Employee Reports </span></a></li>
+
+                                    </ul>
+                                </li>
+
+                                <li class="sidebar-item" id="EMPLOYEE" runat="server" style="display: none"><a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-user"></i><span style="margin-left: 20px; font-size: 16px">Employee</span></a>
+                                    <ul aria-expanded="false" class="collapse  first-level">
+                                        <li class="sidebar-item" id="EmployeeMaster" runat="server" style="display: none"><a href="EmployeeEntry.aspx" class="sidebar-link"><i class="fa fa-user-plus"></i><span class="hide-menu">Employee Master </span></a></li>
+                                        <li class="sidebar-item" id="EmployeeSearch" runat="server" style="display: none"><a href="frm_employee_search.aspx" class="sidebar-link"><i class="fa fa-edit fa-fw"></i><span class="hide-menu">Employee Search </span></a></li>
+                                        <%--<li class="sidebar-item" id="EmployeeReports" runat="server" style="display: none"><a href="employee_detail_report.aspx" class="sidebar-link"><i class="fa fa-tasks"></i><span class="hide-menu">Employee Report</span></a></li>--%>
+                                    </ul>
+                                </li>
+
+                            </ul>
+
+                        </nav>
+
+                    </div>
+                </aside>
+                <div class="page-wrapper hero-image">
+                    <div class="container-fluid">
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <script src="jsForms/masterpage.js"></script>
+    <script type="text/javascript">
+        var empId = '<%=Session["emp_id"] %>'
+    </script>
+
+    <script src="assets/libs/popper.js/dist/umd/popper.min.js"></script>
+    <script src="assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="notify-master/js/notify.js"></script>
+    <script src="assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+    <script src="assets/extra-libs/sparkline/sparkline.js"></script>
+    <script src="dist/js/waves.js"></script>
+    <script src="dist/js/sidebarmenu.js"></script>
+    <script src="dist/js/custom.min.js"></script>
+    <%-- <script src="assets/libs/flot/excanvas.js"></script>
+    <script src="assets/libs/flot/jquery.flot.js"></script>
+    <script src="assets/libs/flot/jquery.flot.pie.js"></script>
+    <script src="assets/libs/flot/jquery.flot.time.js"></script>
+    <script src="assets/libs/flot/jquery.flot.stack.js"></script>
+    <script src="assets/libs/flot/jquery.flot.crosshair.js"></script>--%>
+    <%--<script src="assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>--%>
+    <%--<script src="dist/js/pages/chart/chart-page-init.js"></script>--%>
+    <script src="assets/libs/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="bootstrap-datepicker-1.9.0-dist/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
+
+    <script type="text/javascript">
+        function myFunction() {
+            var x = document.getElementById("utk1");
+            if (x.style.display == "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
