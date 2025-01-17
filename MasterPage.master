@@ -11,6 +11,7 @@
     <meta name="author" content="" />
     <%--<link rel="shortcut icon" href="image/logo.png" />--%>
     <title>SCHOOL ERP</title>
+    <link rel="icon" href="image/school_logo.png" />
     <script src="assets/libs/jquery/dist/jquery.min.js"></script>
 
     <link href="assets/libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
