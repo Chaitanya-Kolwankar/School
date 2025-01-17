@@ -128,7 +128,7 @@
                                             <asp:Label ID="Label3" runat="server" Text="Academic Year"></asp:Label>
                                         </div>
                                         <div class="col-md-8" style="padding-left: 0px;">
-                                            <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+                                            <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true"></asp:ScriptManager>
                                             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                                                 <ContentTemplate>
                                                     <asp:DropDownList ID="ddlyear" CssClass="form-control" TabIndex="1" runat="server" OnSelectedIndexChanged="ddlyear_SelectedIndexChanged" AutoPostBack="true" Style="border-radius: 5px; width: 300px">

@@ -630,7 +630,7 @@ public partial class frm_feeDuration : System.Web.UI.Page
                 {
                     grduration.DataSource = null;
                     grduration.DataBind();
-                    ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('No fee duration defined', { color: '#fff', background: '#D44950', blur: 0.2, delay: 0, timeout: 100 });", true);
+                    //ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "anything", "$.notify('No fee duration defined', { color: '#fff', background: '#D44950', blur: 0.2, delay: 0, timeout: 100 });", true);
                 }
             }
         }

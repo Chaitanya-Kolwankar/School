@@ -43,7 +43,7 @@ public class Class1
     public string urls()
     {
         //return "http://192.168.1.2/schoolapi/";
-        return "http://localhost:9199/";
+        return "http://vivacollege.in/School_API/";
     }
 
     public string imageFolder()
